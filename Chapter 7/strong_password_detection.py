@@ -39,16 +39,15 @@ digits_regex = re.compile(r"[0-9]")
 
 # validation on meeting all the requirements
 def password_validator(password):
-    r = bool(len(password) > 7
-                  and lower_letter_regex.search(password)
-                  and upper_letter_regex.search(password)
-                  and digits_regex.search(password))
-    if r is True:
-        print(f"{user_password} is valid password")
-    else:
-        print(f"{user_password} is NOT a valid password")
+    return bool(len(password) > 7
+                and lower_letter_regex.search(password)
+                and upper_letter_regex.search(password)
+                and digits_regex.search(password))
 
-
-password_validator(user_password)
+# analyzing result
+if password_validator(user_password) is True:
+    print(f"{user_password} is valid password")
+else:
+    print(f"{user_password} is NOT a valid password")
 
 
