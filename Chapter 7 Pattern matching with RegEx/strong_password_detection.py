@@ -48,6 +48,7 @@ digits_regex = re.compile(r"[0-9]")
 # validation on meeting all the requirements
 def password_validator(password):
     return bool(len(password) > 7
+                and len(password) < 21
                 and lower_letter_regex.search(password)
                 and upper_letter_regex.search(password)
                 and digits_regex.search(password))

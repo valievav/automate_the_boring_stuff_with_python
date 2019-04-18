@@ -12,7 +12,7 @@ def strip(string, symbol = ' '): # setting up default symbol value if nothing is
     strip_result = regex.sub("", string)
     return strip_result
 
-text = "_text_"
+text = "___text_"
 symbol = "_"
 
 if symbol == '':

@@ -1,7 +1,6 @@
 import unittest
 from strip_string import strip
 
-
 class TestsStrip(unittest.TestCase):
 
     def test_both_sides(self):
