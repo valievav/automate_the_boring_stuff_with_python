@@ -5,6 +5,16 @@ If number is odd, then collatz() should print and return 3 * number + 1.
 '''
 
 def collatz(number):
+    try:
+        number = int(number)
+    except ValueError:
+        print("Non integer values are not accepted. Please enter a positive numeric value.")
+        return
+
+    if number <= 0:
+        print("Negative values or 0 are not accepted. Please enter a positive numeric value.")
+        return
+
     count = 0
     while number != 1:
         count = count + 1
@@ -16,13 +26,5 @@ def collatz(number):
             print(number)
     print("Finished in " + str(count) + " tries")
 
-
-# user value validation
-try:
-    number = int(input("Please enter a positive numeric value: \n"))
-    if number <= 0:
-        print("Negative values or 0 are not accepted. Please enter a positive numeric value.")
-    else:
-        collatz(number)
-except ValueError:
-    print("Non integer values are not accepted. Please enter a positive numeric value.")
+number = input("Please enter a positive numeric value: \n")
+collatz(number)
