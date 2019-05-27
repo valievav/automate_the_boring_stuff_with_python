@@ -1,6 +1,9 @@
 import unittest
 from strip_string import strip
 
+#TODO find a way to write tests for functions with input()
+
+
 class TestsStrip(unittest.TestCase):
 
     def test_both_sides(self):

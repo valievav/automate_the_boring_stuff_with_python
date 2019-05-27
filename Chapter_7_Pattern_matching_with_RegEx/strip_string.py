@@ -12,6 +12,9 @@ def strip(string, symbol = ' '): # setting up default symbol value if nothing is
     strip_result = regex.sub("", string)
     return strip_result
 
+#TODO - update hardcored values to input() after I figured out how to test it
+
+
 text = "___text_"
 symbol = "_"
 
