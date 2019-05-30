@@ -8,7 +8,7 @@ def phone_number_email_extractor(text):
 
     phone_regex = re.compile(r'''
                 (\d{3}|\(\d{3}\))?              # area code
-                (?(1)(-|\s))?                   # separator - searched for ONLY when first group is found
+                (?(1)(-|\s))?                   # separator - matches ONLY when first group is found (if condition is used to find phone numbers w/o separators like 1234567890)
                 (\d{3})                         # first 3 digits
                 (-|\s)?                         # separator
                 (\d{4})                         # last 4 digits
@@ -54,7 +54,7 @@ text = pyperclip.paste()
 # execute extractor
 result_count, result = phone_number_email_extractor(text)
 
-# insert resulted phone and emails into clipboard
+# insert results into clipboard
 if result_count > 0:
     pyperclip.copy(result)
     print(f"{result_count} results are copied to the clipboard: \n{result}")
