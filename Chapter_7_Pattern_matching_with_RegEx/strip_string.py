@@ -7,19 +7,16 @@ to the function will be removed from the string.
 """
 import re
 
-def strip(string, symbol = ' '): # setting up default symbol value if nothing is passed
-    regex = re.compile(r"^{0}*|{0}*$".format(symbol))
+def strip(string, char = ' '): # setting up default char value if nothing is passed
+    regex = re.compile(r"^{0}*|{0}*$".format(char))
     strip_result = regex.sub("", string)
     return strip_result
 
-#TODO - update hardcored values to input() after I figured out how to test it
+text = input("Please enter text\n")
+char = input("Please enter strip value(s)\n")
 
-
-text = "___text_"
-symbol = "_"
-
-if symbol == '':
+if char == '':
     print(strip(text))
 else:
-    print(strip(text, symbol))
+    print(strip(text, char))
 
