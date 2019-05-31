@@ -6,7 +6,7 @@ from random_quiz_csv_data_reader import data_reader
 from random_quiz_csv_data_writer import data_writer
 
 # writing-reading csv data is done for practicing purposes
-data_writer()# populating csv file with quiz data
+data_writer("data.csv")# populating csv file with quiz data
 quiz_data = data_reader("data.csv") # getting data from csv as a dictionary
 
 # creating work folder
@@ -24,11 +24,11 @@ def files_generator(quiz_data, number_of_files):
         file_questions = open(f"US_State_Capitals_Quiz_{quiz_number+1}.txt", "w")
         file_questions.write("Date:\n"
                              "Student:\n\n" +
-                             " "*8 + "US State Capitals QUIZ\n"
+                             " "*5 + f"US State Capitals QUIZ (Form {quiz_number+1})\n"
                              "\n" )
     
         file_answers = open(f"US_State_Capitals_Quiz_{quiz_number+1}_Answers.txt", "w")
-        file_answers.write("US State Capitals QUIZ answers\n\n")
+        file_answers.write(f"US State Capitals QUIZ answers (Form {quiz_number-1})\n\n")
 
 
         states_list = list(quiz_data.keys()) # generating list of states to iterate through

@@ -24,8 +24,8 @@ quiz_data = {
     'Wisconsin': 'Madison', 'Wyoming': 'Cheyenne'}
 
 
-def data_writer():
-    with open("data.csv", "w", newline="") as csv_file:
+def data_writer(file_name):
+    with open(file_name, "w", newline="") as csv_file:
         writer = csv.writer(csv_file)
         for k,v in quiz_data.items():
             writer.writerow([k, v])
