@@ -24,7 +24,7 @@ def files_generator(quiz_data, number_of_files):
         file_questions = open(f"US_State_Capitals_Quiz_{quiz_number+1}.txt", "w")
         file_questions.write("Date:\n"
                              "Student:\n\n" +
-                             " "*10 + "US State Capitals QUIZ\n"
+                             " "*8 + "US State Capitals QUIZ\n"
                              "\n" )
     
         file_answers = open(f"US_State_Capitals_Quiz_{quiz_number+1}_Answers.txt", "w")
@@ -52,5 +52,7 @@ def files_generator(quiz_data, number_of_files):
                 file_questions.write(f"{abcd[i]}. {answers[i]}\n")
             file_answers.write(f"{question_number}. {abcd[answers.index(correct_answer)]}. {correct_answer}\n")
 
+        file_answers.close()
+        file_questions.close()
 
 files_generator(quiz_data, number_of_files)
