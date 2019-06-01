@@ -6,8 +6,8 @@ from random_quiz_csv_data_reader import data_reader
 from random_quiz_csv_data_writer import data_writer
 
 # writing-reading csv data is done for practicing purposes
-data_writer("data.csv")# populating csv file with quiz data
-quiz_data = data_reader("data.csv") # getting data from csv as a dictionary
+data_writer("random_quiz_data.csv")# populating csv file with quiz data
+quiz_data = data_reader("random_quiz_data.csv") # getting data from csv as a dictionary
 
 # creating work folder
 working_dir = "C:\\Users\\Venus\\Downloads\\US State Capitals Quiz"
