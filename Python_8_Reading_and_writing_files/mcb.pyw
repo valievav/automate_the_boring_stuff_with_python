@@ -84,7 +84,7 @@ def help_printer():
           "* mcb.pyw help - prints all available operations to the console")
 
 
-shelf_file = shelve.open("mcb")
+shelf_file = shelve.open("mcb") # object with dictionary like structure to store {keyword:content} values
 
 # sys.argv - returns command line from cmd as a list, e.g., mvb.pyw[0] save[1] keyword[2]
 # check for empty input
