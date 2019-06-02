@@ -16,7 +16,7 @@ file.close()
 keywords = ('ADJECTIVE', 'NOUN', 'VERB', 'ADVERB')
 
 # detecting keywords and substituting them with user input
-def keywords_replacer(string, keywords_list):
+def replace_keywords(string, keywords_list):
 
     # checks each keyword from the list against string till no match is found
     while True:
@@ -38,7 +38,7 @@ def keywords_replacer(string, keywords_list):
             return string
 
 
-result = keywords_replacer(text, keywords)
+result = replace_keywords(text, keywords)
 print(result)
 
 # creating new file with results

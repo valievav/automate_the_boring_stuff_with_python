@@ -17,7 +17,7 @@ file.close()
 
 
 # detecting keywords and replacing them with user input
-def keywords_replacer(string):
+def replace_keywords(string):
 
     keywords = ('ADJECTIVE', 'NOUN', 'VERB', 'ADVERB')
     str_len = len(string)
@@ -53,7 +53,7 @@ def keywords_replacer(string):
     return string
 
 
-result = keywords_replacer(text)
+result = replace_keywords(text)
 print(result)
 
 # creating new file with results
