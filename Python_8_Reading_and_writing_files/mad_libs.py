@@ -16,15 +16,14 @@ file.close()
 keywords = ('ADJECTIVE', 'NOUN', 'VERB', 'ADVERB')
 
 # detecting keywords and substituting them with user input
-def keywords_substitutor(string, keywords_list):
+def keywords_replacer(string, keywords_list):
 
     # checks each keyword from the list against string till no match is found
     while True:
-
         keyword_found = False # flag used to determine if string has any match after the iteration
 
         for keyword in keywords_list:
-            regex = re.compile(r"{0}".format(keyword), re.IGNORECASE)
+            regex = re.compile(r"{0}".format(keyword)) # lowercase matches are not included in case keyword in a part of some word
             result = regex.search(string)
 
             user_value = ''
@@ -35,12 +34,11 @@ def keywords_substitutor(string, keywords_list):
             if user_value != '':
                 string = regex.sub(user_value, string, count=1) # change 1st occurrence of the keyword
 
-
         if keyword_found == False: # if nothing found during last iteration, return result
             return string
 
 
-result = keywords_substitutor(text, keywords)
+result = keywords_replacer(text, keywords)
 print(result)
 
 # creating new file with results
