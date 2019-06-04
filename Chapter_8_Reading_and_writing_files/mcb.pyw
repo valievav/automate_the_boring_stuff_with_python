@@ -68,7 +68,7 @@ def content_remover(shelf_file, keyword):
 
 
 # deleting all keywords
-def all_kewords_remover(shelf_file):
+def all_keywords_remover(shelf_file):
     shelf_file.clear()
     print("All keywords with its content is deleted from the shelve")
 
@@ -105,7 +105,7 @@ elif operation_arg == "delete" and args_length == 3:    # e.g. mcb.pyw delete us
 elif operation_arg == "list" and args_length == 2:      # e.g. mcb.pyw list
     all_keywords_lister(shelf_file)
 elif operation_arg == "delete" and args_length == 2:    # e.g. mcb.pyw delete
-    all_kewords_remover(shelf_file)
+    all_keywords_remover(shelf_file)
 elif operation_arg == "help" and args_length == 2:      # e.g. mcb.pyw help
     help_printer()
 elif args_length == 2:                                  # e.g. mcb.pyw user_name
