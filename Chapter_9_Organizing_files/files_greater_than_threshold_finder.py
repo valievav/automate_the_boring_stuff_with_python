@@ -11,7 +11,7 @@ NOTE: solution was improved to display files sorted by size
 
 
 import os
-from sorting_file_size_solutions import sort_results_by_size  # module with several solution to sorting list problem
+from find_files_greater_than_threshold_sorting_solutions import sort_results_by_size  # module with several solution to sorting list problem
 
 
 def find_files_greater_than_threshold(path, threshold_file_size):
@@ -43,12 +43,17 @@ def find_files_greater_than_threshold(path, threshold_file_size):
                 if item_size >= threshold_file_size:
                     files_list_result.append([item_path, item_size])
 
+    # check if found results
+    if len(files_list_result) == 0:
+        print(f"No files found greater than {threshold_file_size}")
+        return
+
     # sort list by size (to change sorting solution, head over to solutions module)
     sorted_results, list_length = sort_results_by_size(files_list_result)
 
     print(f"SUMMARY: Found {list_length} files >= {threshold_file_size}:")
     for file, size in sorted_results:
-        print(str(size).ljust(10), str(file).ljust(100))
+        print(str(size).ljust(15), str(file))
 
 
 search_path = "D:\\Jupyter notebook"
