@@ -47,9 +47,11 @@ def find_files_greater_than_threshold(path, threshold_file_size):
     if len(files_list_result) == 0:
         print(f"No files found greater than {threshold_file_size}")
         return
+    else:
+        list_length = len(files_list_result)
 
     # sort list by size (to change sorting solution, head over to solutions module)
-    sorted_results, list_length = sort_results_by_size(files_list_result)
+    sorted_results = sort_results_by_size(files_list_result)
 
     print(f"SUMMARY: Found {list_length} files >= {threshold_file_size}:")
     for file, size in sorted_results:

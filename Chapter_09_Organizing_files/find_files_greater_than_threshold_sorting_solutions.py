@@ -11,7 +11,7 @@ def sort_results_through_new_list(files_list):
     This is done by creating a separate empty list and filling it in with max size values from the initial list.
     While sorted values are recorded into the new list, they are removed from the old list to save resources.
     :param files_list: list of lists
-    :return: sorted files list, length of the sorted list
+    :return: sorted files list
     """
 
     # list should not be empty to do the order
@@ -37,8 +37,7 @@ def sort_results_through_new_list(files_list):
         else:
             sorted_files_list.append(files_list[0])  # adding last sub-list to the new list
             del files_list[0]  # removing last sub-list from the old list
-            list_length = len(sorted_files_list)
-            return sorted_files_list, list_length
+            return sorted_files_list
 
 
 # more advance solution with lambda usage
@@ -46,12 +45,11 @@ def sort_results_with_lambda(files_list):
     """
     Sorts files list in desc order by the file size using sorted() and lambda.
     :param files_list: list of lists
-    :return: sorted files list, length of the sorted list
+    :return: sorted files list
     """
 
     sorted_results = sorted(files_list, key=lambda x: x[1], reverse=True)
-    list_length = len(sorted_results)
-    return sorted_results, list_length
+    return sorted_results
 
 
 # solution with using bubble sort algorithm (the biggest value bubbles up)
@@ -59,14 +57,13 @@ def sort_results_with_bubble_sort(files_list):
     """
     Sorts files list in desc order by the file size using bubble sort algorithm.
     :param files_list: list of lists
-    :return: sorted files list, length of the sorted list
+    :return: sorted files list
     """
 
     while True:
         change_happened = False
 
-        list_length = len(files_list)
-        for i in range(list_length-1):
+        for i in range(len(files_list)-1):
             if files_list[i][1] < files_list[i+1][1]:
                 temp = files_list[i]
                 files_list[i] = files_list[i+1]
@@ -74,7 +71,7 @@ def sort_results_with_bubble_sort(files_list):
                 change_happened = True
 
         if not change_happened:
-            return files_list, list_length
+            return files_list
 
 
 # method to switch between solutions by commenting out non-required method
