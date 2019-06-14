@@ -14,18 +14,22 @@ def open_top_search_results():
 
     # finding link elements on a search results page
     soup = bs4.BeautifulSoup(page.text, features="html.parser")
-    elements = soup.select(".r a")
+    elements = soup.select("li > h2 > a")
 
     # opening each search link in a browser
     tabs_count = min(5, len(elements))  # returns smallest number between results_count and elements length
     for n in range(tabs_count):
-        link = url+elements[n].get("href")
+        link = elements[n].get("href")
         webbrowser.open(link)
         print(f"Opening {link}")
 
 
 search_keywords = " ".join(sys.argv[1:])
 url = "https://www.bing.com/search?q="
+
+# using default search keywords if no argument passed with command line
+if not search_keywords:
+    search_keywords = "blade+runner"
 
 open_top_search_results()
 
