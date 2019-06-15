@@ -66,18 +66,3 @@ os.makedirs(working_folder, exist_ok=True)
 # running method to download comic images from url
 download_img(target_url, working_folder)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
