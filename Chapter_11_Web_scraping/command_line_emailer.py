@@ -18,7 +18,7 @@ def send_email(email_service, to_email, from_email, password, text):
     :param from_email: valid email
     :param password:
     :param text:
-    :return:
+    :return: nothing
     """
 
     # open browser
@@ -89,33 +89,4 @@ my_email = "test@gmail.com"
 my_password = "test123*"
 
 send_email(gmail_service, recipient_email, my_email, my_password, email_text)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# email_regex = re.compile(r"([a-zA-Z0-9.+-_]+)@([a-z0-9-_]+).[a-z]{2,4}")
-# # if exists email
-# if email_regex.search(command_line_string):
-#     receiver_email = email_regex.search(command_line_string).group()
-# else:
-#     print("Please enter a recipient e-mail and text you'd like to send.")
 
