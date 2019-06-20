@@ -6,13 +6,16 @@ up a separate email account for this program.)
 '''
 
 from selenium import webdriver
-import sys, time
-
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as ec
+import sys
 
 def send_email(email_service, to_email, from_email, password, text):
     """
-    Sends email using provided email and text from command line.
-    If values are missing, it's using a default recipient email and text.\n
+    Sends email letter using provided email and text from command line.
+    If values are missing, it's using a default recipient email and text.
+    Used browser - Firefox.\n
     :param email_service: link
     :param to_email: valid email
     :param from_email: valid email
@@ -27,57 +30,50 @@ def send_email(email_service, to_email, from_email, password, text):
     driver.get(email_service)
     print(f"Opened {email_service} to send an e-mail")
 
+    wait = WebDriverWait(driver, 10)
+
     # enter email
-    email_field = driver.find_element_by_id("identifierId")
+    email_field = wait.until(ec.visibility_of_element_located((By.ID, "identifierId")))
     email_field.clear()
     email_field.send_keys(from_email)
 
-    next_button_email = driver.find_element_by_id("identifierNext")
+    next_button_email = wait.until(ec.visibility_of_element_located((By.ID, "identifierNext")))
     next_button_email.click()
 
-    time.sleep(2)
-
     # enter password
-    password_field = driver.find_element_by_name("password")
+    password_field = wait.until(ec.visibility_of_element_located((By.NAME, "password")))
     password_field.clear()
     password_field.send_keys(password)
 
-    next_button_password = driver.find_element_by_id("passwordNext")
+    next_button_password = wait.until(ec.visibility_of_element_located((By.ID, "passwordNext")))
     next_button_password.click()
-    
-    time.sleep(5)
 
-    # open new e-mail window
-    compose_button = driver.find_element_by_css_selector(".aic .z0 div")
+    # open new email window
+    compose_button = wait.until(ec.visibility_of_element_located((By.CSS_SELECTOR, ".aic .z0 div")))
     compose_button.click()
 
-    time.sleep(5)
-
     # enter recipient email
-    recipient_field = driver.find_element_by_css_selector(".oj>div>textarea")
+    recipient_field = wait.until(ec.visibility_of_element_located((By.CSS_SELECTOR, ".oj>div>textarea")))
     recipient_field.clear()
     recipient_field.send_keys(to_email)
 
     # enter email text
-    text_element = driver.find_element_by_css_selector(".Ar.Au div")
+    text_element = wait.until(ec.visibility_of_element_located((By.CSS_SELECTOR, ".Ar.Au div")))
     text_element.clear()
     text_element.send_keys(text)
 
     # send the email
-    send_button = driver.find_element_by_css_selector(".dC div")
+    send_button = wait.until(ec.visibility_of_element_located((By.CSS_SELECTOR, ".dC div")))
     send_button.click()
     print(f"Email to {recipient_email} is sent")
 
-    time.sleep(5)
     driver.quit()
 
 
-command_line_string = " ".join(sys.argv[1:])
-
 # use cmd vars if it's not empty
-if command_line_string:
-    recipient_email = command_line_string[1]
-    email_text = command_line_string[2:]
+if sys.argv:
+    recipient_email = sys.argv[1]
+    email_text = sys.argv[2:]
 
 # use default values if cmd is empty
 else:
