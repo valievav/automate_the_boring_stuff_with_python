@@ -5,9 +5,16 @@ images. You could write a program that works with any photo site that has
 a search feature.
 '''
 
-import os, requests, bs4, urllib.request
+import os, requests, bs4, urllib.request, re
 
-def download_pictures(url, keywords, cwd):
+def download_images(url, keywords, cwd):
+    """
+    Downloads images from Flickr after the keywords search.\n
+    :param url:
+    :param keywords:
+    :param cwd: absolute path
+    :return: nothing
+    """
 
     # create folder to store results
     os.makedirs(cwd, exist_ok=True)
@@ -17,23 +24,21 @@ def download_pictures(url, keywords, cwd):
     page = requests.get(url + "/search?q=" + keywords)
     page.raise_for_status()
 
-    # extract all images
+    # extract images
     soup = bs4.BeautifulSoup(page.text, features="html.parser")
-    images = soup.select("div.view.photo-list-view.requiredToShowOnServer")
+    images = soup.find_all('div', attrs={'class' : 'view photo-list-photo-view requiredToShowOnServer awake'})  # targeting only top 24 img for now
 
-    # save each image
-    for n in range(len(images)-1):
-        href = images[n].get('href')
+    for n in range(0, len(images)-1):
 
-        if href:
-            image_url = url + href
-            path = image_url.split("/")
-            file_name = path[-1]
-            destination_file = cwd + file_name
-            urllib.request.urlretrieve(image_url, destination_file)
-            print(f"Image '{file_name}' is saved")
-            pass
+        # extracting .jpg image from style attribute
+        element = images[n].get('style')
+        img = re.search(f'\/\/live.staticflickr.com\/.+\.jpg', element).group()
 
+        # saving images
+        path = img.split("/")
+        img_name = path[-2] + "_" + path[-1]
+        urllib.request.urlretrieve("https:" + img, cwd + img_name)
+        print(f"Image {img_name} is saved")
 
 
 website = "https://www.flickr.com"
@@ -41,5 +46,5 @@ search_keywords = "blade runner 2049"
 website_name = website.replace("https://www.", "")
 working_directory = f"D:\\Images from {website_name}\\"
 
-download_pictures(website, search_keywords, working_directory)
+download_images(website, search_keywords, working_directory)
 
