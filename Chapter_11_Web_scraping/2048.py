@@ -10,6 +10,7 @@ automatically play the game.
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+import selenium.common.exceptions as selenium_exceptions
 import random
 
 
@@ -19,6 +20,7 @@ def play_game(url):
     :param url: valid url
     :return: nothing
     """
+
     driver = webdriver.Firefox()
     driver.maximize_window()
     driver.get(url)
@@ -38,7 +40,7 @@ def play_game(url):
                 break
 
         # if not over - check if game is won
-        except Exception:
+        except selenium_exceptions.NoSuchElementException:
 
             try:
                 game_won = driver.find_element_by_css_selector("div.game-message.game-won")
@@ -47,7 +49,7 @@ def play_game(url):
                     break
 
             # if neither over nor won - play game
-            except Exception:
+            except selenium_exceptions.NoSuchElementException:
                 direction = random.randint(1, 4)
 
                 if direction == 1:
