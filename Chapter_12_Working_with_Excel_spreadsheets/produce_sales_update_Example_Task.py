@@ -36,25 +36,29 @@ def update_produce_price(file, produce_column, price_column, produce_price, new_
 
 
     # open Excel file
-    wb = openpyxl.load_workbook(file)
-    sheet = wb.active
+    try:
+        wb = openpyxl.load_workbook(file)
+    except FileNotFoundError:
+        print(f"File '{file}' does not exist in '{os.getcwd()}'")
+    else:
+        sheet = wb.active
 
-    # make sure produce names in lowercase for further comparison
-    produce_price = {k.lower() : v for k, v in produce_price.items()}
+        # make sure produce names in lowercase for further comparison
+        produce_price = {k.lower() : v for k, v in produce_price.items()}
 
-    # replace prices for required items
-    for cell in list(sheet.columns)[produce_column-1]:
-        produce = cell.value.lower()
-        current_price = sheet.cell(row=cell.row, column=price_column).value
+        # replace prices for required items
+        for cell in list(sheet.columns)[produce_column-1]:
+            produce = cell.value.lower()
+            current_price = sheet.cell(row=cell.row, column=price_column).value
 
-        if produce in produce_price.keys() and current_price != produce_price[produce]:
-            new_price = produce_price[produce]
-            sheet[get_column_letter(price_column)+str(cell.row)] = new_price
-            print(f"Updated price for [{produce}] from {current_price} to {new_price}.")
+            if produce in produce_price.keys() and current_price != produce_price[produce]:
+                new_price = produce_price[produce]
+                sheet[get_column_letter(price_column)+str(cell.row)] = new_price
+                print(f"Updated price for [{produce}] from {current_price} to {new_price}.")
 
-    # save results in a new file
-    wb.save(new_file_name)
-    print(f"See results in '{new_file_name}'.")
+        # save results in a new file
+        wb.save(new_file_name)
+        print(f"See results in '{new_file_name}'.")
 
 
 file_for_update = "produce_sales.xlsx"
