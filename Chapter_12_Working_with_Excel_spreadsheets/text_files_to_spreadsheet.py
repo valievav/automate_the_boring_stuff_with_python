@@ -9,7 +9,7 @@ import openpyxl
 from openpyxl.utils.cell import get_column_letter
 
 
-def text_files_to_spreadsheet(text_files):
+def text_files_to_spreadsheet(files):
     """
     Creates .xlsx file and populates each column with .txt file records.\n
     List of .txt files is passed as a param to the function.\n
@@ -21,18 +21,18 @@ def text_files_to_spreadsheet(text_files):
     sheet = wb.active
 
     def recording_values():
-        for item in text_files:
-            file = open(item)
-            lines = file.readlines()
+        for file in files:
+            current_file = open(file)
+            lines = current_file.readlines()
             for line in lines:
-                column = text_files.index(item)
+                column = files.index(file)
                 row = lines.index(line)
                 sheet[get_column_letter(column+1)+str(row+1)] = line
 
     # alternative memory-efficient option
     def recording_values_memory_efficient():
-        for col in range(len(text_files)):
-            file = open(text_files[col])
+        for col in range(len(files)):
+            file = open(files[col])
             lines = file.readlines()
             for row in range(len(lines)):
                 sheet[get_column_letter(col+1)+str(row+1)] = lines[row]
@@ -43,7 +43,7 @@ def text_files_to_spreadsheet(text_files):
     wb.save("text_files_to_spreadsheet_result.xlsx")
 
 
-text_files_scope = ['test_file_to_spreadsheet_file1.txt', 'test_file_to_spreadsheet_file2.txt']
-text_files_to_spreadsheet(text_files_scope)
+text_files = ['test_file_to_spreadsheet_file1.txt', 'test_file_to_spreadsheet_file2.txt']
+text_files_to_spreadsheet(text_files)
 
 
