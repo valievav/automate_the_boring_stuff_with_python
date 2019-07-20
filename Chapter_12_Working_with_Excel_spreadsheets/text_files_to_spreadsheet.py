@@ -43,7 +43,7 @@ def text_files_to_spreadsheet(files):
     wb.save("text_files_to_spreadsheet_result.xlsx")
 
 
-text_files = ['test_file_to_spreadsheet_file1.txt', 'test_file_to_spreadsheet_file2.txt']
+text_files = ['text_file_to_spreadsheet_file1.txt', 'text_file_to_spreadsheet_file2.txt']
 text_files_to_spreadsheet(text_files)
 
 
