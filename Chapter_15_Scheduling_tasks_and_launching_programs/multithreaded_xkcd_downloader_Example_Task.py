@@ -83,8 +83,12 @@ url = "https://xkcd.com/"
 working_dir = "D:\\xkcd comics\\"
 threads = []
 
-for i in range(1, 50, 5):
-    thread = threading.Thread(target=download_img, args=[url, working_dir, i+99, i])
+for i in range(1, 200, 50):
+    thread = threading.Thread(target=download_img, args=[url, working_dir, i+49, i])
     threads.append(thread)
     thread.start()
 
+# wait for all threads to finish before the print
+for thread in threads:
+    thread.join()
+print(f"Done. Number of threads executed - {len(threads)}")
