@@ -44,9 +44,3 @@ def stopwatch():
 
 stopwatch()
 
-
-
-
-
-
-
