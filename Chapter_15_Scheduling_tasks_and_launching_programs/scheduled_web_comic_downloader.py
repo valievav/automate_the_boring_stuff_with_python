@@ -3,9 +3,9 @@ Write a program that checks the websites of several web comics
 and automatically downloads the images if the comic was updated since the program’s last visit.
 '''
 
-import requests, os, bs4, datetime
+import requests, os, bs4, datetime, time
 from urllib.request import urlretrieve  # to save image to local directory
-
+import schedule  # to schedule program run
 
 def web_comics_downloader(storage_folder, urls_list):
     """
@@ -133,10 +133,16 @@ def web_comics_downloader(storage_folder, urls_list):
         print(f"Process finished. Issues downloaded = {issues_downloaded}")
         # record last runtime
         last_run_time = datetime.datetime.now()
+        print(f"Last run time = {last_run_time}")
 
 
 comics_storage_folder_comics = "D:\\Comics"
 comic_urls = ["https://read-comic.com/category/monstress/"]
 
-web_comics_downloader(comics_storage_folder_comics, comic_urls)
+schedule.every().day.at("20:00").do(web_comics_downloader, comics_storage_folder_comics, comic_urls)
+
+# wait for the scheduled program to run
+while True:
+    schedule.run_pending()
+    time.sleep(1)
 
