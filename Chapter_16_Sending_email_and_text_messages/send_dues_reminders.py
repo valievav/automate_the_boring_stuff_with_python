@@ -6,12 +6,15 @@ and emailing reminders to those who haven’t. Write a script that does this for
 import smtplib, openpyxl
 
 
-def send_dues_reminders(club_name, file, headers_columns):
+def send_dues_reminders(club_name, file, headers_columns, smtp_service, sender_email, sender_email_password):
     """
-    Send due payment remainders for clients with negative balance from provided Excel spreadsheet.
+    Sends due payment remainders for clients with negative balance from provided Excel spreadsheet.
     :param club_name: string
     :param file: Excel file
     :param headers_columns: dictionary with column headers and responsive columns
+    :param smtp_service: valid smtp data
+    :param sender_email: valid email
+    :param sender_email_password: valid password
     :return:
     """
 
@@ -40,17 +43,17 @@ def send_dues_reminders(club_name, file, headers_columns):
                 clients_due_payments.append([client, email, due_amount])
 
     # connect to email server
-    smtp_obj = smtplib.SMTP('smtp.gmail.com', 587)  # connect to google server
+    smtp_obj = smtplib.SMTP(smtp_service[0], smtp_service[1])  # connect to google server
     smtp_obj.ehlo()  # handshake
     smtp_obj.starttls()  # start TLS encryption
-    smtp_obj.login('*****@gmail.com', '******')
+    smtp_obj.login(sender_email, sender_email_password)
 
     # send email
     for group in clients_due_payments:
         client = group[0]
         email = group[1]
         due_amount = group[2]
-        smtp_obj.sendmail('*****@gmail.com', email, f'Subject: Due payment for {club_name}\n\n'
+        smtp_obj.sendmail(sender_email, email, f'Subject: Due payment for {club_name}\n\n'
                         f'Dear {client},\n\nThis is a kindly reminder on the next term payment.'
                         f'\nThe amount due is {due_amount}.'
                         f'\n\nPlease make sure to pay it till the end of the Earth month or the last Blue Moon circle.'
@@ -66,5 +69,9 @@ def send_dues_reminders(club_name, file, headers_columns):
 establishment_name = "Lucky Horse Members Club"
 members_file = "Send_dues Membership Payments Tracker.xlsx"
 file_headers_columns = {'Client': 0, 'Email': 0, 'Account balance': 0}
-send_dues_reminders(establishment_name, members_file, file_headers_columns)
+from_email = "*****@gmail.com"
+from_email_password = "*****"
+smtp_service = ('smtp.gmail.com', 587)
+
+send_dues_reminders(establishment_name, members_file, file_headers_columns, smtp_service, from_email, from_email_password)
 
