@@ -53,7 +53,7 @@ def send_dues_reminders(club_name, file, headers_columns, smtp_service, sender_e
         client = group[0]
         email = group[1]
         due_amount = group[2]
-        smtp_obj.sendmail(sender_email, email, f'Subject: Due payment for {club_name}\n\n'
+        send_email = smtp_obj.sendmail(sender_email, email, f'Subject: Due payment for {club_name}\n\n'
                         f'Dear {client},\n\nThis is a kindly reminder on the next term payment.'
                         f'\nThe amount due is {due_amount}.'
                         f'\n\nPlease make sure to pay it till the end of the Earth month or the last Blue Moon circle.'
@@ -61,7 +61,10 @@ def send_dues_reminders(club_name, file, headers_columns, smtp_service, sender_e
                         f'Please contact Saddy if you have more questions.'
                         f'\n\nAs usual, see you on the Equestrian trail!'
                         f'\nSincerely, Your Club')
-        print(f"Message for {client} on {due_amount} due has been to {email}.")
+        if send_email == {}:
+            print(f"Message for {client} on {due_amount} due has been to {email}.")
+        else:
+            print(f"Attention! Email for {client}, email {email} has NOT been sent.")
     print("Done.")
     smtp_obj.quit()
 
