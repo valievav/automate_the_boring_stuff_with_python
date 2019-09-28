@@ -67,7 +67,7 @@ def weather_results(api_call, timestamp_hour=None, get_raw_data=False):
 
 city_name = "Krakow"
 country_code = "pl"
-api_key = "f4903b072656d35aa82e06a04f1e5408"
+api_key = "******"
 
 number_of_days = 5
 number_of_results = 8*number_of_days  # 8 is a number of timestamps returned for 1 day (weather is provided for every 3 hours)

@@ -76,7 +76,7 @@ if __name__ == "__main__":
     # run rain check
     city_name = "krakow"
     country_code = "pl"
-    api_key = "f4903b072656d35aa82e06a04f1e5408"
+    api_key = "*********"
     number_of_results = 4  # number of timestamps for 1 day (weather is provided for every 3 hours) - used 1/2 day
     api_weather_call = f"https://api.openweathermap.org/data/2.5/forecast?q={city_name},{country_code}&units=metric&cnt={number_of_results}&APPID={api_key}"
     show_forecast = True
