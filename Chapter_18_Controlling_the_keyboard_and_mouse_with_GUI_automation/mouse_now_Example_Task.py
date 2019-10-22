@@ -1,6 +1,6 @@
 """
 Write a program that constantly displays the x- and y-coordinates of the
-mouse cursor as you move it around.
+mouse cursor as you move it around. Also display RGB color of the pixel under the cursor.
 """
 import pyautogui
 import sys
@@ -19,7 +19,8 @@ def display_mouse_position():
             if x_new != x_prev and y_new != y_prev:
                 print("\b"*line_len, end="")  # erase previously printed line
 
-                result_line = f"x = {x_new}, y = {y_new}"
+                r, g, b = pyautogui.screenshot().getpixel((x_new, y_new))
+                result_line = f"x = {x_new}, y = {y_new} RGB: {r, g, b}"
                 print(result_line, end="")
                 x_prev, y_prev, line_len = x_new, y_new, len(result_line)
 
